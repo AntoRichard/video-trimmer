@@ -1,10 +1,17 @@
 from moviepy.editor import *
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
-video = VideoFileClip("./sample/SampleVideo.mp4")
-duration = video.duration
+clip = VideoFileClip("./sample/SampleVideo.mp4", audio=True)
+duration = int(clip.duration)
 part = 1
 
-for i in range(0, int(duration), 2):
-    ffmpeg_extract_subclip("./sample/SampleVideo.mp4", 0 + i, 2 + i, targetname="./out/test"+ str(part) +".mp4")
+def trim(start, end):
+    subclip = clip.subclip(start, end)
+    subclip.write_videofile( "./out/test"+ str(part) +".mp4", audio=True, threads=8, codec="libx264", audio_codec="aac")
+
+
+for i in range(0, duration, 2):
+    if(duration - i == 1): 
+        trim(i, duration)
+    else:
+        trim(0 + i, 2 + i)
     part += 1
