@@ -2,6 +2,7 @@ from moviepy.editor import *
 
 clip = VideoFileClip("./sample/SampleVideo.mp4", audio=True)
 duration = int(clip.duration)
+sec = 2
 part = 1
 
 def trim(start, end):
@@ -13,5 +14,5 @@ for i in range(0, duration, 2):
     if(duration - i == 1): 
         trim(i, duration)
     else:
-        trim(0 + i, 2 + i)
+        trim(0 + i, sec + i)
     part += 1
