@@ -1,9 +1,10 @@
 from moviepy.editor import *
 
-clip = VideoFileClip("./sample/SampleVideo.mp4", audio=True)
-duration = int(clip.duration)
 sec = 2
+filename = "SampleVideo.mp4"
 part = 1
+clip = VideoFileClip("./source/" + filename, audio=True)
+duration = int(clip.duration)
 
 def trim(start, end):
     subclip = clip.subclip(start, end)
